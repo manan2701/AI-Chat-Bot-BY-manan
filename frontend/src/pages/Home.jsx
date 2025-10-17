@@ -177,6 +177,8 @@ const Home = () => {
             <p>
               In the url add "/register" to create account or "/login" if have account to log in.
               you can only use it if you have account in.
+
+              Now Click on "new" in chat menu create chat and start chatting.
             </p>
           </div>
         )}
