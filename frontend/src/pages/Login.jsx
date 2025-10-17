@@ -21,7 +21,7 @@ const Login = () => {
 
         console.log(form);
 
-        axios.post("https://aichatbotpractice.onrender.com/api/auth/login", {
+        axios.post("http://localhost:3000/api/auth/login", {
             email: form.email,
             password: form.password
         },
