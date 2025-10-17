@@ -11,8 +11,6 @@ const chatRoutes = require("./routes/chat.route");
 
 const app = express();
 
-
-
 /* using middlewares */
 app.use(cors({
     origin: 'http://localhost:5173',
