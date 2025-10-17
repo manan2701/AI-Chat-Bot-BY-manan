@@ -5,7 +5,7 @@ import ChatSidebar from '../components/chat/ChatSidebar.jsx';
 import ChatMessages from '../components/chat/ChatMessages.jsx';
 import ChatComposer from '../components/chat/ChatComposer.jsx';
 import '../components/chat/ChatLayout.css';
-import { fakeAIReply } from '../components/chat/aiClient.js';
+// ...existing code...
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import {
@@ -73,10 +73,18 @@ const Home = () => {
     tempSocket.on("ai-response", (messagePayload) => {
       console.log("Received AI response:", messagePayload);
 
-      setMessages((prevMessages) => [ ...prevMessages, {
-        type: 'ai',
-        content: messagePayload.content
-      } ]);
+      // server emits { message: <text> } — prefer that, fallback to content
+      const aiContent = messagePayload?.message ?? messagePayload?.content ?? '';
+      if (!aiContent) {
+        console.warn("Empty AI response received", messagePayload);
+        dispatch(sendingFinished());
+        return;
+      }
+
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { type: "ai", content: aiContent },
+      ]);
 
       dispatch(sendingFinished());
     });
@@ -107,14 +115,7 @@ const Home = () => {
       content: trimmed
     })
 
-    // try {
-    //   const reply = await fakeAIReply(trimmed);
-    //   dispatch(addAIMessage(activeChatId, reply));
-    // } catch {
-    //   dispatch(addAIMessage(activeChatId, 'Error fetching AI response.', true));
-    // } finally {
-    //   dispatch(sendingFinished());
-    // }
+  // Note: AI response handled via socket.io on the server.
   }
 
   const getMessages = async (chatId) => {
@@ -153,7 +154,7 @@ return (
         <div className="chat-welcome" aria-hidden="true">
           <div className="chip">Early Preview</div>
           <h1>ChatGPT Clone</h1>
-          <p>Ask anything. Paste text, brainstorm ideas, or get quick explanations. Your chats stay in the sidebar so you can pick up where you left off.</p>
+          <p>Ask anything. Paste text, brainstorm ideas, or get quick explanations. Your chats stay in the sidebar so you can pick up where you left off. This is dummy ai created by manan borda for the learning purpose using Google Gemini 2.0 Flash model. It uses Vector database for the logn term memory and normal js function to remember short term memory.</p>
         </div>
       )}
       <ChatMessages messages={messages} isSending={isSending} />

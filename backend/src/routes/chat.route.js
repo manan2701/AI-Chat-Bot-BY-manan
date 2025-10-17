@@ -5,7 +5,7 @@ const router = require('express').Router();
 
 
 
-router.use("/", authMiddleware.authUser, chatController.createChat)
+router.post("/", authMiddleware.authUser, chatController.createChat)
 
 
 router.get('/', authMiddleware.authUser, chatController.getChats)
