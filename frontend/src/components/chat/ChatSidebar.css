@@ -18,6 +18,7 @@
 .chat-sidebar.open {
   transform: translateX(270px);
 }
+
 @media (min-width: 960px) {
   .chat-sidebar {
     position: static;
@@ -117,3 +118,4 @@
     display: none;
   }
 }
+

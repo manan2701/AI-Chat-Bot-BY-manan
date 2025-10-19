@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { Link,useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { setUser } from '../store/userSlice';
+import { useDispatch } from 'react-redux';
 
 
 const Login = () => {
     const [ form, setForm ] = useState({ email: '', password: '' });
     const [ submitting, setSubmitting ] = useState(false);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-    
 
     function handleChange(e) {
         const { name, value } = e.target;
@@ -18,9 +20,6 @@ const Login = () => {
         e.preventDefault();
         setSubmitting(true);
 
-
-        console.log(form);
-
         axios.post("https://mananborda-aichatbotpractice.onrender.com/api/auth/login", {
             email: form.email,
             password: form.password
@@ -29,7 +28,8 @@ const Login = () => {
                 withCredentials: true
             }
         ).then((res) => {
-            console.log(res);
+            console.log(res.data.user);
+            dispatch(setUser(res.data.user));
             navigate("/");
         }).catch((err) => {
             console.error(err);

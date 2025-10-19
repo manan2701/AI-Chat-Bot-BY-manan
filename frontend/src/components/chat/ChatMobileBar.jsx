@@ -12,9 +12,6 @@ const ChatMobileBar = ({ onToggleSidebar, onNewChat }) => (
       ☰
     </button>
     <h1 className="chat-app-title">Chat</h1>
-    <button className="chat-icon-btn" onClick={onNewChat} aria-label="New chat">
-      ＋
-    </button>
   </header>
 );
 

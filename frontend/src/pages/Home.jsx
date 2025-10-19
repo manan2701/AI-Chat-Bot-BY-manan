@@ -19,6 +19,7 @@ import {
   addAIMessage,
   setChats,
 } from "../store/chatSlice.js";
+import Navbar from "../components/chat/Navbar.jsx";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -144,6 +145,9 @@ const Home = () => {
 
   return (
     <div className="chat-layout minimal">
+      <Navbar>
+
+      </Navbar>
       <ChatMobileBar
         onToggleSidebar={() => setSidebarOpen((o) => !o)}
         onNewChat={handleNewChat}
@@ -175,10 +179,10 @@ const Home = () => {
 
             <h1>How to use</h1>
             <p>
-              In the url add "/register" to create account or "/login" if have account to log in.
-              you can only use it if you have account in.
+              Step : 1 Create account login if have account to log in. <br/>
+              (Login is require to use it) <br/>
 
-              Now Click on "new" in chat menu create chat and start chatting.
+              Setp : 2 Now Click on "new" in chat menu create chat and start chatting.
             </p>
           </div>
         )}
