@@ -63,7 +63,7 @@ function initSocketServer(httpServer) {
         queryMemory({
           queryVector: vector,
           limit: 3,
-          metadata: { user: { $eq: "68d2619a9790a292fdd5da5c" } },
+          metadata: { user: { $eq: socket.user._id.toString() } },
         }),
         messageModel.find({
           chat: messagePayload.chat,
